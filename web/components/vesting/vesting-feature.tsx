@@ -4,19 +4,19 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletButton } from '../solana/solana-provider';
 import { AppHero, ellipsify } from '../ui/ui-layout';
 import { ExplorerLink } from '../cluster/cluster-ui';
-import { useCounterProgram } from './counter-data-access';
-import { CounterCreate, CounterList } from './counter-ui';
+import { useVestingProgram } from './vesting-data-access';
+import { VestingCreate, VestingList } from './vesting-ui';
 
-export default function CounterFeature() {
+export default function VestingFeature() {
   const { publicKey } = useWallet();
-  const { programId } = useCounterProgram();
+  const { programId } = useVestingProgram();
 
   return publicKey ? (
     <div>
       <AppHero
-        title="Counter"
+        title="Token Vesting"
         subtitle={
-          'Create a new account by clicking the "Create" button. The state of a account is stored on-chain and can be manipulated by calling the program\'s methods (increment, decrement, set, and close).'
+          'Create a new vesting account below'
         }
       >
         <p className="mb-6">
@@ -25,9 +25,9 @@ export default function CounterFeature() {
             label={ellipsify(programId.toString())}
           />
         </p>
-        <CounterCreate />
+        <VestingCreate />
       </AppHero>
-      <CounterList />
+      <VestingList />
     </div>
   ) : (
     <div className="max-w-4xl mx-auto">
