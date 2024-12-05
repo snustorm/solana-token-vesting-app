@@ -7,12 +7,30 @@ body {
   height: 100%;
 }
 
-.wallet-adapter-button-trigger {
+/* .wallet-adapter-button-trigger {
   background: rgb(100, 26, 230) !important;
   border-radius: 8px !important;
   padding-left: 16px !important;
   padding-right: 16px !important;
+} */
+
+.wallet-adapter-button-trigger {
+    background: white !important; /* Set to your primary blue color */
+    color: #4472CA !important;
+    border-radius: 0 !important; /* Remove rounded borders */
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    border: 2px solid #4472CA !important; /* Add black border */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow for 3D effect */
+    font-family: inherit !important;
 }
+
+.btn_major {
+    background: #f4d35e;
+    border-radius: 0;
+    color: white;
+}
+
 .wallet-adapter-dropdown-list,
 .wallet-adapter-button {
   font-family: inherit !important;

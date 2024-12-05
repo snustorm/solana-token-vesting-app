@@ -14,11 +14,12 @@ export default function VestingFeature() {
   return publicKey ? (
     <div>
       <AppHero
-        title="Token Vesting"
+        title="Hi! Manager"
         subtitle={
           'Create a new vesting account below'
         }
       >
+        <p>Program ID:</p>
         <p className="mb-6">
           <ExplorerLink
             path={`account/${programId}`}

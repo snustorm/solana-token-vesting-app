@@ -7,11 +7,15 @@ skip-lint = false
 [programs.localnet]
 vesting = "2fzdHewRpESFkqyfwcpYdUQeZGVpQ1wW42moDrYH7ZFu"
 
+[programs.devnet]
+vesting = "2fzdHewRpESFkqyfwcpYdUQeZGVpQ1wW42moDrYH7ZFu"
+
+
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "Localnet"
+cluster = "devnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]

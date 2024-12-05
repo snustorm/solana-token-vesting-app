@@ -11,7 +11,23 @@ module.exports = {
     ...createGlobPatternsForDependencies(__dirname),
   ],
   theme: {
-    extend: {},
+    extend: {
+        colors: {
+            yellow: {
+              500: '#dcca44', // Sets yellow-500 as #fee440
+            },
+            blue: {
+              500: '#276FBF', // Sets blue-500 as #4472CA
+            },
+            white: '#ffffff', // Ensures white is set as #ffffff
+          },
+          spacing: {
+            12: '3rem', // Adjust height as needed
+          },
+          boxShadow: {
+            'light-3d': '0 2px 4px rgba(0, 0, 0, 0.1)',
+          },
+    },
   },
   plugins: [require('daisyui')],
 };

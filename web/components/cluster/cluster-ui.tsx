@@ -1,23 +1,15 @@
-'use client';
+'use client'
 
-import { useConnection } from '@solana/wallet-adapter-react';
-import { IconTrash } from '@tabler/icons-react';
-import { useQuery } from '@tanstack/react-query';
-import { ReactNode, useState } from 'react';
-import { AppModal } from '../ui/ui-layout';
-import { ClusterNetwork, useCluster } from './cluster-data-access';
-import { Connection } from '@solana/web3.js';
+import { useConnection } from '@solana/wallet-adapter-react'
+import { IconTrash } from '@tabler/icons-react'
+import { useQuery } from '@tanstack/react-query'
+import { ReactNode, useState } from 'react'
+import { AppModal } from '../ui/ui-layout'
+import { ClusterNetwork, useCluster } from './cluster-data-access'
+import { Connection } from '@solana/web3.js'
 
-export function ExplorerLink({
-  path,
-  label,
-  className,
-}: {
-  path: string;
-  label: string;
-  className?: string;
-}) {
-  const { getExplorerUrl } = useCluster();
+export function ExplorerLink({ path, label, className }: { path: string; label: string; className?: string }) {
+  const { getExplorerUrl } = useCluster()
   return (
     <a
       href={getExplorerUrl(path)}
@@ -27,20 +19,20 @@ export function ExplorerLink({
     >
       {label}
     </a>
-  );
+  )
 }
 
 export function ClusterChecker({ children }: { children: ReactNode }) {
-  const { cluster } = useCluster();
-  const { connection } = useConnection();
+  const { cluster } = useCluster()
+  const { connection } = useConnection()
 
   const query = useQuery({
     queryKey: ['version', { cluster, endpoint: connection.rpcEndpoint }],
     queryFn: () => connection.getVersion(),
     retry: 1,
-  });
+  })
   if (query.isLoading) {
-    return null;
+    return null
   }
   if (query.isError || !query.data) {
     return (
@@ -48,57 +40,66 @@ export function ClusterChecker({ children }: { children: ReactNode }) {
         <span>
           Error connecting to cluster <strong>{cluster.name}</strong>
         </span>
-        <button
-          className="btn btn-xs btn-neutral"
-          onClick={() => query.refetch()}
-        >
+        <button className="btn btn-xs btn-neutral" onClick={() => query.refetch()}>
           Refresh
         </button>
       </div>
-    );
+    )
   }
-  return children;
+  return children
 }
 
 export function ClusterUiSelect() {
-  const { clusters, setCluster, cluster } = useCluster();
-  return (
-    <div className="dropdown dropdown-end">
-      <label tabIndex={0} className="btn btn-primary rounded-btn">
-        {cluster.name}
-      </label>
-      <ul
-        tabIndex={0}
-        className="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4"
-      >
-        {clusters.map((item) => (
-          <li key={item.name}>
-            <button
-              className={`btn btn-sm ${
-                item.active ? 'btn-primary' : 'btn-ghost'
-              }`}
-              onClick={() => setCluster(item)}
-            >
-              {item.name}
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+    const { clusters, setCluster, cluster } = useCluster()
+    return (
+      <div className="dropdown dropdown-end">
+        <label
+          tabIndex={0}
+          style={{
+            backgroundColor: '#4472CA', // Blue background
+            color: '#FFFFFF', // White text color
+            borderRadius: '0', // Remove rounded corners
+            border: '2px solid black', // Solid black border
+            padding: '8px 16px',
+            boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)', // Light shadow for 3D effect
+          }}
+          className="btn"
+        >
+          {cluster.name}
+        </label>
+        <ul
+          tabIndex={0}
+          className="menu dropdown-content z-[1] p-2 w-52 mt-4"
+          style={{
+            backgroundColor: '#FFFFFF', // White background for dropdown
+            boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.15)', // Light shadow for dropdown
+          }}
+        >
+          {clusters.map((item) => (
+            <li key={item.name}>
+              <button
+                style={{
+                  backgroundColor: item.active ? '#4472CA' : '#fee440', // Blue for active, Yellow for inactive
+                  color: '#FFFFFF', // White text
+                  borderRadius: '0', // No rounded corners
+                }}
+                onClick={() => setCluster(item)}
+                className="btn btn-sm"
+              >
+                {item.name}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
 
-export function ClusterUiModal({
-  hideModal,
-  show,
-}: {
-  hideModal: () => void;
-  show: boolean;
-}) {
-  const { addCluster } = useCluster();
-  const [name, setName] = useState('');
-  const [network, setNetwork] = useState<ClusterNetwork | undefined>();
-  const [endpoint, setEndpoint] = useState('');
+export function ClusterUiModal({ hideModal, show }: { hideModal: () => void; show: boolean }) {
+  const { addCluster } = useCluster()
+  const [name, setName] = useState('')
+  const [network, setNetwork] = useState<ClusterNetwork | undefined>()
+  const [endpoint, setEndpoint] = useState('')
 
   return (
     <AppModal
@@ -107,15 +108,15 @@ export function ClusterUiModal({
       show={show}
       submit={() => {
         try {
-          new Connection(endpoint);
+          new Connection(endpoint)
           if (name) {
-            addCluster({ name, network, endpoint });
-            hideModal();
+            addCluster({ name, network, endpoint })
+            hideModal()
           } else {
-            console.log('Invalid cluster name');
+            console.log('Invalid cluster name')
           }
         } catch {
-          console.log('Invalid cluster endpoint');
+          console.log('Invalid cluster endpoint')
         }
       }}
       submitLabel="Save"
@@ -145,11 +146,11 @@ export function ClusterUiModal({
         <option value={ClusterNetwork.Mainnet}>Mainnet</option>
       </select>
     </AppModal>
-  );
+  )
 }
 
 export function ClusterUiTable() {
-  const { clusters, setCluster, deleteCluster } = useCluster();
+  const { clusters, setCluster, deleteCluster } = useCluster()
   return (
     <div className="overflow-x-auto">
       <table className="table border-4 border-separate border-base-300">
@@ -168,30 +169,22 @@ export function ClusterUiTable() {
                     {item?.active ? (
                       item.name
                     ) : (
-                      <button
-                        title="Select cluster"
-                        className="link link-secondary"
-                        onClick={() => setCluster(item)}
-                      >
+                      <button title="Select cluster" className="link link-secondary" onClick={() => setCluster(item)}>
                         {item.name}
                       </button>
                     )}
                   </span>
                 </div>
-                <span className="text-xs">
-                  Network: {item.network ?? 'custom'}
-                </span>
-                <div className="whitespace-nowrap text-gray-500 text-xs">
-                  {item.endpoint}
-                </div>
+                <span className="text-xs">Network: {item.network ?? 'custom'}</span>
+                <div className="whitespace-nowrap text-gray-500 text-xs">{item.endpoint}</div>
               </td>
               <td className="space-x-2 whitespace-nowrap text-center">
                 <button
                   disabled={item?.active}
                   className="btn btn-xs btn-default btn-outline"
                   onClick={() => {
-                    if (!window.confirm('Are you sure?')) return;
-                    deleteCluster(item);
+                    if (!window.confirm('Are you sure?')) return
+                    deleteCluster(item)
                   }}
                 >
                   <IconTrash size={16} />
@@ -202,5 +195,5 @@ export function ClusterUiTable() {
         </tbody>
       </table>
     </div>
-  );
+  )
 }

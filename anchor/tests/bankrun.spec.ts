@@ -18,7 +18,6 @@ import NodeWallet from "@coral-xyz/anchor/dist/cjs/nodewallet";
 import IDL from "../target/idl/vesting.json";
 import { Vesting } from "../target/types/vesting";
 import { SYSTEM_PROGRAM_ID } from "@coral-xyz/anchor/dist/cjs/native/system";
-import { resolve } from "path";
 
 describe("Vesting Smart Contract Tests", () => {
     const companyName = "Company";
