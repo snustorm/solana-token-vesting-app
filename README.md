@@ -1,33 +1,21 @@
-# token-vesting
+# Solana Token-Vesting Swap (Full Code: Frontend, backend, smart contract)
 
-This project is generated with the [create-solana-dapp](https://github.com/solana-developers/create-solana-dapp) generator.
+<div align="center">
+  <p style="color: red; font-size: 20px; font-weight: bold;">
+    Feel free to use, deploy, and improve this project
+  </p>
+</div>
+
+- smart contract(devnet): GPCNSb6BAefBhaEhUVEbuVDeHyxcjuFq1KZofv6Mjcba
+- Functions support:
+  - Create Multiple Vesting Account for Employee
+  - Create Multiple Employee Account
+  - Claim Tokens
+  
+<img width="833" alt="截屏2024-12-05 21 22 11" src="https://github.com/user-attachments/assets/3d56608a-503a-4aa0-9010-9d8e410ce0ff">
+
 
 ## Getting Started
-
-### Prerequisites
-
-- Node v18.18.0 or higher
-
-- Rust v1.77.2 or higher
-- Anchor CLI 0.30.0 or higher
-- Solana CLI 1.18.9 or higher
-
-### Installation
-
-#### Clone the repo
-
-```shell
-git clone <repo-url>
-cd <repo-name>
-```
-
-#### Install Dependencies
-
-```shell
-npm install
-```
-
-#### Start the web app
 
 ```
 npm run dev
